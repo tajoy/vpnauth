@@ -1,5 +1,5 @@
 #!/opt/python27/bin/python2.7
-from django.core.management import execute_manager
+from django.core.management import execute_from_command_line
 import imp
 try:
     imp.find_module('settings') # Assumed to be in the same directory.
@@ -9,6 +9,11 @@ except ImportError:
     sys.exit(1)
 
 import settings
+import sys
+import os
+
+sys.path.append('/data/django/')
 
 if __name__ == "__main__":
-    execute_manager(settings)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+    execute_from_command_line(sys.argv)
